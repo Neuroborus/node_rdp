@@ -15,8 +15,15 @@
                 document.write("<h1> Room ID is mandatory to join </h1>");
                 return;
             }
+            protocol = window.location.protocol;
+            host = window.location.hostname;
+            port = window.location.port;
+            console.log(protocol);
+            console.log(host);
+            console.log(port);
 
-            socket = io.connect('http://192.168.0.101:5000');
+            connectAddr = protocol+'//'+host+':'+port;
+            socket = io.connect(connectAddr);  // 'http://192.168.0.101:5000'
 
             socket.emit("join-message", room);
             socket.on('screen-data', function(message){
