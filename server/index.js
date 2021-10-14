@@ -4,6 +4,19 @@ let io = require('socket.io')(http);
 const internalIp = require('internal-ip');
 const { PORT } = require('../utils');
 
+
+let server_port = PORT || 5000;
+let myIp;
+async function prepare() {
+    myIp = await internalIp.v4();
+}
+(async () => {
+    await prepare();
+    console.log('Ready: '+myIp+':'+server_port);
+})();
+
+
+
 app.get('/view', (req, res) => {
     res.sendFile(__dirname + '/display.html');
 })
@@ -38,8 +51,7 @@ io.on('connection', (socket)=> {
     })
 })
 
-let server_port = PORT || 5000;
-http.listen(server_port, async () => {
-    let myIp = await internalIp.v4();
-    console.log("Host: "+myIp+':'+server_port);
+
+http.listen(server_port, () => {
+    console.log('Server up!');
 })
