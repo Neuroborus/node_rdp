@@ -1,12 +1,27 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const { v4: uuidv4 } = require('uuid');
 const screenshot = require('screenshot-desktop');
-var robot = require("robotjs");
+let robot = require("robotjs");
+const { PORT } = require('../utils');
+const internalIp = require('internal-ip');
 
-var socket = require('socket.io-client')('http://192.168.0.101:5000');
-var interval;
+let socket;
+let myIp;
+let host;
+let interval;
+
+async function prepare() {
+    myIp = await internalIp.v4();
+    host = myIp+':'+PORT;
+}
 
 function createWindow () {
+    (async () => {
+        await prepare();
+    })();
+    
+    console.log('Host: ' + host);
+    socket = require('socket.io-client')(host)
     const win = new BrowserWindow({
         width: 500,
         height: 150,
@@ -18,9 +33,9 @@ function createWindow () {
     win.loadFile('index.html')
 
     socket.on("mouse-move", function(data){
-        var obj = JSON.parse(data);
-        var x = obj.x;
-        var y = obj.y;
+        let obj = JSON.parse(data);
+        let x = obj.x;
+        let y = obj.y;
 
         robot.moveMouse(x, y);
     })
@@ -30,14 +45,14 @@ function createWindow () {
     })
 
     socket.on("type", function(data){
-        var obj = JSON.parse(data);
-        var key = obj.key;
+        let obj = JSON.parse(data);
+        let key = obj.key;
 
         robot.keyTap(key);
     })
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(prepare).then(createWindow)
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -53,15 +68,15 @@ app.on('activate', () => {
 
 ipcMain.on("start-share", function(event, arg) {
 
-    var uuid = "test";//uuidv4();
+    let uuid = "test";//uuidv4();
     socket.emit("join-message", uuid);
     event.reply("uuid", uuid);
 
     interval = setInterval(function() {
         screenshot().then((img) => {
-            var imgStr = new Buffer(img).toString('base64');
+            let imgStr = new Buffer(img).toString('base64');
 
-            var obj = {};
+            let obj = {};
             obj.room = uuid;
             obj.image = imgStr;
 

@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "internal-ip": "^6.2.0",
+    "ip": "^1.1.5",
     "socket.io": "^3.0.4"
   }
 }

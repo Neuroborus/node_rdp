@@ -17,6 +17,8 @@ Run `./node_modules/.bin/electron-rebuild` (`.\node_modules\.bin\electron-rebuil
 
 
 client:
+> ./node_modules/.bin/electron-rebuild
+
 > npm start
 
 server:
