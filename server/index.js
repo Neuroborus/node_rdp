@@ -23,31 +23,31 @@ app.get('/view', (req, res) => {
 
 io.on('connection', (socket)=> {
 
-    socket.on("join-message", (roomId) => {
+    socket.on('join-message', (roomId) => {
         socket.join(roomId);
-        console.log("User joined in a room : " + roomId);
+        console.log('Room is active: ' + roomId);
     })
 
-    socket.on("screen-data", function(data) {
+    socket.on('screen-data', function(data) {
         data = JSON.parse(data);
         let room = data.room;
         let imgStr = data.image;
         socket.broadcast.to(room).emit('screen-data', imgStr);
     })
 
-    socket.on("mouse-move", function(data) {
+    socket.on('mouse-move', function(data) {
         let room = JSON.parse(data).room;
-        socket.broadcast.to(room).emit("mouse-move", data);
+        socket.broadcast.to(room).emit('mouse-move', data);
     })
 
-    socket.on("mouse-click", function(data) {
+    socket.on('mouse-click', function(data) {
         let room = JSON.parse(data).room;
-        socket.broadcast.to(room).emit("mouse-click", data);
+        socket.broadcast.to(room).emit('mouse-click', data);
     })
 
-    socket.on("type", function(data) {
+    socket.on('type', function(data) {
         let room = JSON.parse(data).room;
-        socket.broadcast.to(room).emit("type", data);
+        socket.broadcast.to(room).emit('type', data);
     })
 })
 

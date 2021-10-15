@@ -5,7 +5,7 @@ install c++ build instrumentary & python3/pip for system & add to path
 
 
 
-In case electron error:
+In electron error case:
 
 Run `npm i -D electron-rebuild` to add the electron-rebuild package
 

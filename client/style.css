@@ -1,34 +1,37 @@
 * {
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
+    font-family: cursive;
 }
 
 .header {
     width: 100%;
     height: fit-content;
     text-align: center;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     color: white;
     font-weight: bolder;
-    background: #4148ae;
+    background: #6e7546;
     font-size: 20px;
 }
 
 .code {
-    padding: 2px;
-    text-align: center;
+    padding: 10px;
+    text-align: right;
 }
 
 .container { display: grid; }
 
 .btn {
+    cursor: pointer;
+    padding-top: 0px;
+    width: 100%;
     border: 0;
-    background: #4148ae;
+    background: #1f424d;
     color: white;
-    padding: 4px;
-    font-size: 16px;
+    padding: 2px;
+    font-size: 20px;
     position: center;
 }
 
