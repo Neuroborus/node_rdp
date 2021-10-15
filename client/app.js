@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { v4: uuidv4 } = require('uuid');
 const screenshot = require('screenshot-desktop');
 let robot = require('robotjs');
-const { PORT } = require('../utils');
+const { PORT } = require('../utils/utils');
 const internalIp = require('internal-ip');
 
 let socket;
@@ -33,9 +33,9 @@ function createWindow() {
   win.loadFile('index.html');
 
   socket.on('mouse-move', function (data) {
-    let obj = JSON.parse(data);
-    let x = obj.x;
-    let y = obj.y;
+    const obj = JSON.parse(data);
+    const x = obj.x;
+    const y = obj.y;
 
     robot.moveMouse(x, y);
   });
@@ -45,8 +45,8 @@ function createWindow() {
   });
 
   socket.on('type', function (data) {
-    let obj = JSON.parse(data);
-    let key = obj.key;
+    const obj = JSON.parse(data);
+    const key = obj.key;
 
     robot.keyTap(key);
   });
@@ -67,7 +67,8 @@ app.on('activate', () => {
 });
 
 ipcMain.on('start-share', function (event, arg) {
-  let uuid = 'test'; //uuidv4();
+  //let uuid = 'test'; //uuidv4();
+  const uuid = Math.random().toString(36).substring(2, 7);
   socket.emit('join-message', uuid);
   event.reply('uuid', uuid);
 

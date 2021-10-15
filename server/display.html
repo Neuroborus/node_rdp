@@ -13,7 +13,7 @@
 
         window.onload = function () {
             let room = prompt('Please, enter Room Phrase: ');
-            if (room.trim().length == 0) {
+            if (room.trim().length !== 5) {
                 document.write('<h1> Room Phrase is necessary to join! </h1>');
                 return;
             }
