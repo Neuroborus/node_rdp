@@ -1,18 +1,20 @@
-<html lang="en">
+<html lang="en" style="background-color: #DFDBE5;
+background-image: url(../utils/floating-cogs.svg);">
 
 <head>
+    <link rel="stylesheet" href="style.css" />
     <title>Codeboard Screecast Viewer</title>
 </head>
 
-<body style="background: linear-gradient(45deg, #804a03, #a81989b8);">
+<body style="background-color: #DFDBE5;
+background-image: linear-gradient(to right, #434343 0%, black 100%);">
     <img style="width:90%; height:90%; margin-top: 2%; margin-left: 5%" />
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" crossorigin="anonymous"></script>
     <script>
 
         window.onload = function () {
-            let room = prompt('Please, enter Room Phrase: ');
+            const room = prompt('Please, enter Room Phrase: ');
             if (room.trim().length !== 5) {
                 document.write('<h1> Room Phrase is necessary to join! </h1>');
                 return;
@@ -34,25 +36,25 @@
 
             $('img').mousemove(function (e) {
 
-                let posX = $(this).offset().left;
-                let posY = $(this).offset().top;
+                const posX = $(this).offset().left;
+                const posY = $(this).offset().top;
 
-                let x = e.pageX - posX;
-                let y = e.pageY - posY;
+                const x = e.pageX - posX;
+                const y = e.pageY - posY;
 
-                let obj = { 'x': x, 'y': y, 'room': room }
+                const obj = { 'x': x, 'y': y, 'room': room }
                 socket.emit('mouse-move', JSON.stringify(obj));
 
             })
 
             $('img').click(function (e) {
-                let obj = { 'room': room };
+                const obj = { 'room': room };
                 socket.emit('mouse-click', JSON.stringify(obj));
             })
 
             $(window).bind('keyup', function (e) {
                 console.log('key pushed: '+e.key);
-                let obj = { 'key': e.key, 'room': room };
+                const obj = { 'key': e.key, 'room': room };
                 socket.emit('type', JSON.stringify(obj));
             })
         }

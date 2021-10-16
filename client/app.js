@@ -23,7 +23,7 @@ function createWindow() {
   console.log('Host: ' + host);
   socket = require('socket.io-client')(host);
   const win = new BrowserWindow({
-    width: 500,
+    width: 250,
     height: 150,
     webPreferences: {
       nodeIntegration: true,
@@ -45,10 +45,8 @@ function createWindow() {
   });
 
   socket.on('type', function (data) {
-    const obj = JSON.parse(data);
-    const key = obj.key;
-
-    robot.keyTap(key);
+    console.log('Type: '+data);
+    robot.keyTap(data.toLowerCase());
   });
 }
 

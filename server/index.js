@@ -30,24 +30,25 @@ io.on('connection', (socket)=> {
 
     socket.on('screen-data', function(data) {
         data = JSON.parse(data);
-        let room = data.room;
-        let imgStr = data.image;
+        const room = data.room;
+        const imgStr = data.image;
         socket.broadcast.to(room).emit('screen-data', imgStr);
     })
 
     socket.on('mouse-move', function(data) {
-        let room = JSON.parse(data).room;
+        const room = JSON.parse(data).room;
         socket.broadcast.to(room).emit('mouse-move', data);
     })
 
     socket.on('mouse-click', function(data) {
-        let room = JSON.parse(data).room;
+        const room = JSON.parse(data).room;
         socket.broadcast.to(room).emit('mouse-click', data);
     })
 
     socket.on('type', function(data) {
-        let room = JSON.parse(data).room;
-        socket.broadcast.to(room).emit('type', data);
+        const room = JSON.parse(data).room;
+        const key = JSON.parse(data).key;
+        socket.broadcast.to(room).emit('type', key);
     })
 })
 
