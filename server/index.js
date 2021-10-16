@@ -51,6 +51,11 @@ io.on('connection', (socket)=> {
         socket.broadcast.to(room).emit('mouse-click', data);
     })
 
+    socket.on('mouse-right-click', function(data) {
+        const room = JSON.parse(data).room;
+        socket.broadcast.to(room).emit('mouse-right-click', data);
+    })
+
     socket.on('type', function(data) {
         const room = JSON.parse(data).room;
         const key = JSON.parse(data).key;

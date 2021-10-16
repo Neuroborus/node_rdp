@@ -43,10 +43,19 @@ function createWindow() {
   socket.on('mouse-click', function (data) {
     robot.mouseClick();
   });
+  
+  socket.on('mouse-right-click', function (data) {
+    robot.mouseClick("right");
+  });
 
   socket.on('type', function (data) {
     //console.log('Type: '+data);
-    robot.keyTap(data.toLowerCase());
+    const key = data.toLowerCase();
+    try {
+      robot.keyTap(key);
+    } catch (ex) {
+      console.error("key error: " + key);
+    }
   });
 }
 

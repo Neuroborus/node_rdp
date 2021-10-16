@@ -52,6 +52,12 @@ background-image: linear-gradient(to right, #434343 0%, black 100%);">
                 socket.emit('mouse-click', JSON.stringify(obj));
             })
 
+            $('img').contextmenu(function (e) {
+                const obj = { 'room': room };
+                socket.emit('mouse-right-click', JSON.stringify(obj));
+                return false; // Disable context-menu
+            })
+
             $(window).bind('keyup', function (e) {
                 console.log('key pushed: '+e.key);
                 const obj = { 'key': e.key, 'room': room };
