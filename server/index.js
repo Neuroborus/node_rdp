@@ -1,6 +1,6 @@
-let app = require('express')();
-let http = require('http').createServer(app);
-let io = require('socket.io')(http);
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const internalIp = require('internal-ip');
 const { PORT } = require('../utils/utils');
 
@@ -17,15 +17,21 @@ async function prepare() {
 
 
 
-app.get('/view', (req, res) => {
+app.get('/control', (req, res) => {
     res.sendFile(__dirname + '/display.html');
 })
 
 io.on('connection', (socket)=> {
 
-    socket.on('join-message', (roomId) => {
-        socket.join(roomId);
-        console.log('Room is active: ' + roomId);
+    socket.on('join-message', function(room) {
+        socket.join(room);
+        console.log('Room is active: ' + room);
+    })
+
+    socket.on('screen-preload', function(data) {
+        screenInfo = JSON.parse(data);
+        console.log(screenInfo.width+'X'+screenInfo.height);
+        socket.broadcast.to(room).emit('screen-preload', data);
     })
 
     socket.on('screen-data', function(data) {

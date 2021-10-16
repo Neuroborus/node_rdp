@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { v4: uuidv4 } = require('uuid');
 const screenshot = require('screenshot-desktop');
-let robot = require('robotjs');
+const robot = require('robotjs');
 const { PORT } = require('../utils/utils');
 const internalIp = require('internal-ip');
 
@@ -23,7 +23,7 @@ function createWindow() {
   console.log('Host: ' + host);
   socket = require('socket.io-client')(host);
   const win = new BrowserWindow({
-    width: 250,
+    width: 370,
     height: 150,
     webPreferences: {
       nodeIntegration: true,
@@ -45,7 +45,7 @@ function createWindow() {
   });
 
   socket.on('type', function (data) {
-    console.log('Type: '+data);
+    //console.log('Type: '+data);
     robot.keyTap(data.toLowerCase());
   });
 }
@@ -68,6 +68,7 @@ ipcMain.on('start-share', function (event, arg) {
   //let uuid = 'test'; //uuidv4();
   const uuid = Math.random().toString(36).substring(2, 7);
   socket.emit('join-message', uuid);
+  event.reply('control-link', host + '/control');
   event.reply('uuid', uuid);
 
   interval = setInterval(function () {
