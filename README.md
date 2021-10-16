@@ -5,7 +5,7 @@ install c++ build instrumentary & python3/pip for system & add to path
 
 
 
-In case electron error:
+In electron error case:
 
 Run `npm i -D electron-rebuild` to add the electron-rebuild package
 
@@ -17,7 +17,9 @@ Run `./node_modules/.bin/electron-rebuild` (`.\node_modules\.bin\electron-rebuil
 
 
 client:
+> ./node_modules/.bin/electron-rebuild
+
 > npm start
 
-server:
+daemon:
 > node index.js

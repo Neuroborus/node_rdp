@@ -4,13 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "rebuild": "npm rebuild && ./node_modules/.bin/electron-rebuild",
     "start": "electron ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "electron": "^11.1.0",
+    "internal-ip": "^6.2.0",
+    "local-ip": "^2.0.0",
     "mathjs": "^8.1.0",
     "robotjs": "^0.6.0",
     "screenshot-desktop": "^1.12.3",
@@ -18,6 +20,6 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "electron-rebuild": "^2.3.4"
+    "electron-rebuild": "^2.3.5"
   }
 }
