@@ -21,5 +21,5 @@ client:
 
 > npm start
 
-server:
+daemon:
 > node index.js

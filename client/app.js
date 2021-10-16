@@ -10,6 +10,7 @@ let myIp;
 let host;
 let interval;
 
+
 async function prepare() {
   myIp = await internalIp.v4();
   host = 'http://' + myIp + ':' + PORT;
@@ -38,6 +39,16 @@ function createWindow() {
     const y = obj.y;
 
     robot.moveMouse(x, y);
+  });
+
+  socket.on('mouse-down', function (data) {
+      console.log("Mouse down!");
+      robot.mouseToggle("down");
+  });
+
+  socket.on('mouse-up', function (data) {
+      console.log("Mouse up!");
+      robot.mouseToggle("up");
   });
 
   socket.on('mouse-click', function (data) {

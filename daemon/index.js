@@ -56,6 +56,16 @@ io.on('connection', (socket)=> {
         socket.broadcast.to(room).emit('mouse-right-click', data);
     })
 
+    socket.on('mouse-down', function(data) {
+        const room = JSON.parse(data).room;
+        socket.broadcast.to(room).emit('mouse-down', data);
+    })
+
+    socket.on('mouse-up', function(data) {
+        const room = JSON.parse(data).room;
+        socket.broadcast.to(room).emit('mouse-up', data);
+    })
+
     socket.on('type', function(data) {
         const room = JSON.parse(data).room;
         const key = JSON.parse(data).key;
@@ -65,5 +75,5 @@ io.on('connection', (socket)=> {
 
 
 http.listen(server_port, () => {
-    console.log('Server up!');
+    console.log('Daemon up!');
 })
