@@ -1,5 +1,6 @@
 client/package-lock.json
-client/package-lock.json
+daemon/package-lock.json
+.vscode
 
 # Logs
 logs
