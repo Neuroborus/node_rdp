@@ -1,5 +1,5 @@
 {
-  "name": "codeboard-screencast-client",
+  "name": "rdp-client",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,7 +8,6 @@
     "start": "electron ."
   },
   "author": "",
-  "license": "ISC",
   "dependencies": {
     "electron": "^11.1.0",
     "internal-ip": "^6.2.0",
