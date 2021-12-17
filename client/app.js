@@ -42,12 +42,10 @@ function createWindow() {
   });
 
   socket.on('mouse-down', function (data) {
-      console.log("Mouse down!");
       robot.mouseToggle("down");
   });
 
   socket.on('mouse-up', function (data) {
-      console.log("Mouse up!");
       robot.mouseToggle("up");
   });
 
@@ -60,7 +58,6 @@ function createWindow() {
   });
 
   socket.on('type', function (data) {
-    //console.log('Type: '+data);
     const key = data.toLowerCase();
     try {
       robot.keyTap(key);
@@ -85,7 +82,6 @@ app.on('activate', () => {
 });
 
 ipcMain.on('start-share', function (event, arg) {
-  //let uuid = 'test'; //uuidv4();
   const uuid = Math.random().toString(36).substring(2, 7);
   socket.emit('join-message', uuid);
   event.reply('control-link', host + '/control');
@@ -93,9 +89,9 @@ ipcMain.on('start-share', function (event, arg) {
 
   interval = setInterval(function () {
     screenshot().then((img) => {
-      let imgStr = Buffer.from(img).toString('base64');
+      const imgStr = Buffer.from(img).toString('base64');
 
-      let obj = {};
+      const obj = {};
       obj.room = uuid;
       obj.image = imgStr;
 
